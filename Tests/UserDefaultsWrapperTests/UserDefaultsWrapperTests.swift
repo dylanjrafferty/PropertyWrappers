@@ -2,10 +2,20 @@ import XCTest
 @testable import UserDefaultsWrapper
 
 final class UserDefaultsWrapperTests: XCTestCase {
+    
+    @UserDefaultsStored(Example.self) private var example
+    
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(UserDefaultsWrapper().text, "Hello, World!")
+        XCTAssertEqual(Example.defaultValue, example)
+        
+        let newString = "Testing123"
+        example = newString
+        
+        XCTAssertEqual(example, newString)
     }
+}
+
+struct Example: UserDefaultsKey {
+    static var defaultValue = "sampleValue"
+    static var key = "exampleKey"
 }
